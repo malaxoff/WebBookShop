@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" hash="3768672186">
+    <data-source source="LOCAL" name="OracleDB" product="Oracle" version="Oracle Database 11g Express Edition Release 11.2.0.2.0 - Production" jdbc-version="4.0" driver-name="Oracle JDBC driver" driver-version="12.1.0.2.0" uuid="7903d000-42d7-4557-9690-7116e419d422">
+      <extra-name-characters>$#</extra-name-characters>
+      <identifier-quote-string>&quot;</identifier-quote-string>
+      <synchronize>true</synchronize>
+      <jdbc-driver>oracle.jdbc.OracleDriver</jdbc-driver>
+      <jdbc-url>jdbc:oracle:thin:@localhost:1521:XE</jdbc-url>
+      <user-name>system</user-name>
+      <user-password>df99</user-password>
+      <schema-pattern>*.SYSTEM</schema-pattern>
+      <default-schemas>*.SYSTEM</default-schemas>
+      <libraries>
+        <library>
+          <url>file://$PROJECT_DIR$/anyDocs/ojdbc6.jar</url>
+        </library>
+      </libraries>
+    </data-source>
+    <console-mapping uuid="7903d000-42d7-4557-9690-7116e419d422" cfg="Cfg" />
+  </component>
+</project>
+
