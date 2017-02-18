@@ -1,97 +1,80 @@
 package pckgzz.logic.autorisation;
 
 import dao.UsersEntity;
+import mvc.model.TempUser;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
-import pckgzz.logic.admin.AdminMenu;
-import pckgzz.logic.pokupatel.UserMenu;
-import pckgzz.logic.prodavec.SellerMenu;
 import pckgzz.utilz.HibernateSessionFactory;
 
-import java.util.Scanner;
 
-// меню авторизации пользователя
-// маловат тип для номера телефона нужно исправить, поэтому вываливает исключение при выдергивании пользователя из базы с номером больше чем int
+// процедура возвращает статус пользователя 0 - покупатель, 1 - продавец, 2 - админ, 3 - нет аткого пользователя.
 
 public class Autorisation {
-    public static void autorisation(){
 
-        int userstatus = 4;    // статус пользователя выдернутый из базы после авторизации.  По умолчанию не существующий, что бы поймать ошибку
-
-        Scanner scan = new Scanner(System.in);
-
-        UsersEntity newUser = new UsersEntity();
+    public static int autorisation(TempUser tempUser){
 
 
-        System.out.print("Введите свой login       :   ");
-        String login = scan.next();
+        int statusNoBody = 3;      // статус несуществующего пользователя
+        UsersEntity newUser;
 
 
-        System.out.print("Введите свой password    :   ");
-        String password = scan.next();
+        /*
+
+            // **********************      работа с базой данных ***************************************************
+
+            Session session = HibernateSessionFactory.getSessionFactory().openSession();
+            session.beginTransaction();
+
+
+        try{
+
+            // *************************     ищем пользователя  ************************************
+
+            Criteria userCriteria = session.createCriteria(UsersEntity.class);
+                             // выбираем строчку из таблицы со значением столбца равному login  из Index
+            userCriteria.add(Restrictions.eq("userLogin", tempUser.getLogin() ));
+
+
+             // если такого пользователя нет то ...
+            if ( userCriteria.uniqueResult()== null)
+                   {
+                       session.close();   // закрытие сессии перед выходом
+                       return statusNoBody;  // возвращаем несуществующий статус пользователя
+
+                   }
+
+            else     // в противном случае проверяем пароль на соответствие
+              {
+
+                  newUser = (UsersEntity) userCriteria.uniqueResult();
+
+                  if (    (tempUser.getPassword()).equals(newUser.getUserPassword())   )     {
+
+                         // возвращаем статус пользователя, если логин и пароль есть в базе
+                      statusNoBody = newUser.getUserStatusId();
+                      session.close();    // закрытие сессии перед выходом
+                      return  statusNoBody;
+
+                  }
+
+                  else    {    // если пароль не верный ...
+
+                      session.close();   // закрытие сессии перед выходом
+                      return statusNoBody;  // возвращаем несуществующий статус пользователя
+
+                  }
 
 
 
-
-        // работа с базой данных
-        Session session = HibernateSessionFactory.getSessionFactory().openSession();
-        session.beginTransaction();
-
-        // ищем пользователя
-
-        Criteria userCriteria = session.createCriteria(UsersEntity.class);
-
-        userCriteria.add(Restrictions.eq("userLogin", login ));      // выбираем строчку из таблицы со значением столбца равному login
-
-
-            // если такого пользователя нет то пишем : Нет аткого пользователя
-        if ( userCriteria.uniqueResult()== null)
-               {
-                   System.out.println("Нет такого пользователя! Попробуйте еще раз. ");
-                   System.exit(0);
-
-               }    // Доработать. Отправить на повторную попытку
-
-        else     // в противном случае проверяем пароль на соответствие
-          {
-
-              newUser = (UsersEntity) userCriteria.uniqueResult();
-
-              if (    password.equals(newUser.getUserPassword())   )     {
-
-                       System.out.println("Авторизация прошла успешно ... ");
-                       userstatus = newUser.getUserStatusId();      // не плохо бы здесь проверять статус пользователя на адекватность
 
               }
+        session.close();
+        } catch (Exception e) {e.printStackTrace();}
 
-              else    {
-                  System.out.println("Пароль не верный! Попробуйте еще раз.  ");       // Доработать. Отправить на повторную попытку
-                  System.exit(0);
-              }
-
-
-          }
+                       */
 
 
-        session.close();     // закрытие сессии, база нам больше не нужна
-
-        // проверим статус пользователя и в зависимости от него передадим объект пользователя соответствующему методу
-        // так же можно передать в в метод id пользователя
-
-        if (userstatus == 0)    {  UserMenu.userMenu(newUser); }
-        if (userstatus == 1)    {  SellerMenu.sellerMenu(newUser); }
-        if (userstatus == 2)    {  AdminMenu.adminMenu(newUser); }
-
-
-
-
-
-
-
-
-
-
-
+    return statusNoBody;   // возвращаем несуществующий статус пользователя для отлова ошбок
     }
 }

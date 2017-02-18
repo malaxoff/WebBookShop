@@ -9,7 +9,7 @@
 </head>
 
 <body>
-<spring:form method="post"  modelAttribute="userJSP" action="fio-out">
+<spring:form method="post"  modelAttribute="userJSP" action="autorisationResult">
 
   Login: <spring:input path="login"/>  <br/> <br/>
   Password: <spring:input path="password"/>   <br/> <br/>

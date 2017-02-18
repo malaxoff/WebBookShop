@@ -10,12 +10,13 @@
 
 <body>
 <h1> Авторизуйтесь или зарегистрируйтесь</h1>
-<spring:form method="post"  modelAttribute="userJSP" action="fio-out">
+<spring:form method="post"  modelAttribute="userJSP" action="autorisationResult">
     Login    : <spring:input path="login"/>  <br/> <br/>
     Password: <spring:input path="password"/>   <br/> <br/>
     <spring:button>Autorisation</spring:button>
 </spring:form>
-<spring:form method="post"  modelAttribute="userJSP" action="registration">
+
+<spring:form method="post"  modelAttribute="userJSP" action="registrationProcedure">
     <spring:button>Registration</spring:button>
 </spring:form>
 <br/> <br/>
