@@ -6,7 +6,7 @@ import pckgzz.logic.wellcome.WellCome;
 
 //   Начало прораммы.  WellCome.wellCome() запускает процесс авторизации или регистрации ...
 
-
+          ////    не будет этого файла в веб приложении
 
 public class AppMain {
 
